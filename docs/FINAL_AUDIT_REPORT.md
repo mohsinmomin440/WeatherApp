@@ -103,16 +103,16 @@ All results reported below represent actual executions in the local PowerShell e
 - **Configuration:** [`apps/mobile/app.json`](file:///d:/Applications/WeatherApp/apps/mobile/app.json) specifies package `com.skycast.weatherapp`, orientation `portrait`, and permissions `INTERNET`, `ACCESS_NETWORK_STATE`.
 - **Local Bundle:** Hermes Android bytecode successfully generated (`1.6 MB`) via Metro bundler.
 - **Expo Prebuild:** Completed successfully — `apps/mobile/android/` build files generated (Gradle project).
-- **System Image Status:** Android API 34 Google APIs x86_64 system image download in progress (large ~600MB file; network speed was slow during this audit). The emulator binary is installed and ready.
+- **System Image Status:** Android API 34 Google APIs x86_64 system image download **failed** at ~33% (`Warning: Failed to download package!`). The ~600MB x86_64 system image requires manual download or faster network. The emulator binary is installed.
 - **Standalone APK Status:** Not built on disk.
   - *Reason:* Generating a standalone release `.apk` or `.aab` in modern Expo SDK 52 requires either an active Expo Application Services (EAS) account (`eas build -p android --profile preview`) or a fully configured local Android Studio / Android SDK environment with the system image installed.
   - *Recommendation for Testing:* Test via **Expo Go** by scanning the QR code, which runs the full application natively on any Android device without compiling an APK. Once the AVD is ready, run `npx expo run:android`.
-- **Emulator Setup Commands (Manual):**
+- **Manual Commands for Emulator Setup:**
   ```powershell
-  # Install system image (if not already complete):
+  # Retry system image download:
   $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager.bat --install "system-images;android-34;google_apis;x86_64"
 
-  # Create AVD:
+  # Create AVD (after successful download):
   $ANDROID_HOME\cmdline-tools\latest\bin\avdmanager.bat create avd -n "SkyCast" -k "system-images;android-34;google_apis;x86_64" -d pixel_5
 
   # Launch emulator:
