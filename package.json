@@ -1,0 +1,39 @@
+{
+  "name": "skycast-monorepo",
+  "version": "1.0.0",
+  "description": "SkyCast - Smart Weather Forecasting Platform (BCA Final-Year Major Project)",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/web",
+    "apps/mobile"
+  ],
+  "scripts": {
+    "dev": "npm run dev:all",
+    "dev:all": "concurrently -n \"API,WEB\" -c \"cyan,blue\" \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "npm --workspace=apps/api run dev",
+    "dev:web": "npm --workspace=apps/web run dev",
+    "dev:mobile": "npm --workspace=apps/mobile start",
+    "build": "npm run build:api && npm run build:web",
+    "build:api": "npm --workspace=apps/api run build",
+    "build:web": "npm --workspace=apps/web run build",
+    "test": "npm --workspace=apps/api run test && npm --workspace=apps/web run test",
+    "test:api": "npm --workspace=apps/api run test",
+    "test:web": "npm --workspace=apps/web run test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "keywords": [
+    "weather",
+    "forecast",
+    "react",
+    "react-native",
+    "expo",
+    "express",
+    "mongodb",
+    "open-meteo"
+  ],
+  "author": "SkyCast Team",
+  "license": "MIT"
+}
